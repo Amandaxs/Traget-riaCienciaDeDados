@@ -1,0 +1,57 @@
+---
+title: "Divisão de dados em treino e teste"
+output: html_document
+theme: journal
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+###  Breve explicação sobre o tema:
+
+
+Quando estamos trabalhando com aprendizado supervisionado, geralmente estamos interessados em prever valores. A avaliação do modelo é feita de acordo com as medidas que forem adequadas para cada caso. 
+
+Para avaliar o modelo,poderiamos simplesmente calcular estas medidas nos dados que foram utilizados para modelagem, no entanto, fazendo desta forma não conseguimos avaliar o desempenho do modelo em dados desconhecidos.
+
+A divisão a base em treino e teste vem com o objetivo de possibilitar a testagem do modelo em dados não conhecidos ainda. Basicamente, é feita uma separação da base em duas partes, uma para ajustar o modelo e outra para testá-lo após o ajuste. Geralmente, esta divisão é de 30% para teste e 70% para treino, no entanto isso não é uma regra, e para cada problema deve-se pensar em qual proporção adotar para cada caso.
+
+Além da divisão também devemos considerar a importância da representatividade de grupos, e em casos que for importantes, garantir a estratificação trazendo no treino e teste proporções parecidas com a proporção geral.
+
+
+### Carregando pacotes
+
+```{r message=FALSE, warning=FALSE}
+require(tidyverse)
+require(caret)
+```
+
+
+### Base de dados
+
+Para exemplificar utilizarei uma base de dados referente aos preços e pontuações de cada jogador ao longo das rodadas do brasileirão no cartola em 2019 e 2020.
+
+[Link para a base no kaggle](https://www.kaggle.com/lgmoneda/cartola-fc-brasil-scouts)
+
+```{r}
+df = read.csv2('jogadores.csv', header = T, sep = ',', encoding = 'UTF-8')
+df %>% head(4) %>% DT::datatable()
+```
+
+### Entendendo as funções e seus parâmetros:
+
+**createDataPartition**
+
+Essa função pode ser utilizada para criar separações balanceadas da base de dados
+
+* y
+    * Um vetor da base de dados a ser dividida, usualmente o vetor é o de target. Se for um vetor numérico, o balenceamento é feito pelos percentis que podem ser determinados no parâmetro *group*, caso seja categórico, o balanceamento é feito pelas classes.
+* p
+    * Percentual da base a ser utilizado na base de treino
+* list
+    * Valor lógico que indica se o resultado deverá ser exibido em uma lista ou uma matriz
+* group
+    * 
+* times
+  
