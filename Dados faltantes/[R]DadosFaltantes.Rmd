@@ -1,0 +1,8 @@
+---
+title: "Valores faltantes"
+output: html_notebook
+---
+
+**Notebook destinado ao estudo de técnicas para lidar com dados faltantes** 
+
+###  Breve explicação sobre o tema:
